@@ -1,0 +1,8 @@
+{
+  "name": "ChatAnalyzer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "app_id": ""
+}

@@ -1,0 +1,51 @@
+page-requiredinfo {
+ion-content.content{background-color: #e6eaed;font-family: 'DINOT-Regular';}
+
+ion-fab[top][edge].search-menu{top:0;}
+ion-fab.search-menu .fab[mini]{width:34px; height: 32px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;-webkit-box-shadow: 0 0px 6px 0px rgba(0,0,0,0.5);-moz-box-shadow: 0 0px 6px 0px rgba(0,0,0,0.5); box-shadow: 0 0px 6px 0px rgba(0,0,0,0.5);background-color: #fff;}
+ion-fab[right].search-menu{right: 0px;right: calc(-8px + constant(safe-area-inset-right));right: calc(-8px + env(safe-area-inset-right));}
+.fab-close-active .fab-close-icon{top:-3px;left: 5px;color: #ff3c00}
+ion-fab.search-menu .fab[mini] .icon{margin-left: 6px; margin-top: 2px;color: #ff3c00; line-height: 34px !important;}
+ion-fab.search-menu ion-fab-list{width:160px; background-color: #fff;right:20px;-webkit-box-shadow: 0 3px 10px 0px rgba(0,0,0,0.3);-moz-box-shadow: 0 3px 10px 0px rgba(0,0,0,0.3); box-shadow: 0 3px 10px 0px rgba(0,0,0,0.3);margin-top:50px;}
+.fab ion-icon{color: #ff6600;font-size: 2rem;padding-left: 4px;}
+	
+.comment_address{text-align: left; width:100%;border-color: #ffffff;background: #ffffff; padding: 10px;font-family: 'Droid Sans';}
+.comment_address ion-row{padding:0px;}
+.comment_address ion-col{padding:0px;font-size:11px; line-height: 14px;}
+.comment_address ion-col ion-icon{font-size:12px; line-height: 14px;}
+.comment_address .address{padding-left:10px !important; font-weight:600;}
+.comment_address .mt10{margin-top:10px !important;}
+
+h2{font-size: 14px;text-align: left;padding: 0 10px;margin: 9px 0 0;font-family: 'DINOT-Regular'; font-weight: 500; position: relative;}
+h2 span{font-size: 12px;text-align: left;padding: 0; font-weight: 500; color:#939292;}
+h2 ion-icon{font-size: 1.4em;line-height: 18px; vertical-align: middle;}
+	
+ion-card{border-left: solid 2px #ff6600;}
+
+ion-footer .bar-button-md:first-child, .bar-button-ios:first-child {margin-left: 3%;}
+	
+.accordion_wrap{padding: 10px;}
+.accordion_wrap button{background: #fff;border-left: solid 2px #ff6600 !important;border-radius: 2px; margin-bottom: 5px; width: calc(100% - 20px);font-size: 1.4rem;
+-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);}
+	
+.accordion_wrap .accordion{background-color: #fff;color: #444;cursor: pointer;padding: 10px 10px 10px 28px; margin-bottom: 0px; width: 100%;border: none;text-align: left;outline: none;font-size: 14px; line-height: 20px; transition: 0.4s; position: relative;}
+.accordion_wrap .accordion:before {content: '\f100';font-family: "Ionicons";color: #ff6600;font-weight: bold;font-size: 16px;margin-left: 0px;position: absolute;left: 8px;top: 30%;}
+.accordion_wrap .active, .accordion_wrap .accordion:hover{background-color: #fff;}
+.accordion_wrap .active:before {content: "\f1fa";font-family: "Ionicons";}
+	
+.accordion_wrap .panel {padding: 0 20px;margin: 0 5px 7px;background-color: #fff;max-height: 0;overflow: hidden;transition: max-height 0.2s ease-out;}
+.accordion_wrap .panel p{padding: 0;}
+.accordion_wrap .panel button{background: transparent;border: none !important;box-shadow: none;}
+.accordion_wrap .panel ion-label{display: inline-block; margin:0 20px 0 4px;font-size: 14px;}
+.accordion_wrap .panel.radio_text ion-label{font-style: normal !important; color: #000 !important;}
+.accordion_wrap .panel .radio .radio-checked {border-color: #008f19;}
+.accordion_wrap .panel .radio .radio-inner {background: #008f19;}
+.item.item-input.input-has-focus .item-inner {border-bottom-color: #dedede; -webkit-box-shadow: inset 0 -1px 0 0 transparent; box-shadow: inset 0 -1px 0 0 transparent;}
+.accordion_wrap .panel .item{padding-left: 0px;}
+.accordion_wrap .panel .label{color: #999; font-style: italic;}
+.item-input-has-focus .label[floating], .input-has-focus .label[floating], .item-input-has-value .label[floating], .input-has-value .label[floating]{color:#157ac1; font-style: normal;}
+	
+.item-md.item-block .panel .input-has-focus.item-input-has-focus {border-bottom: 1px solid #dedede;}
+}
+

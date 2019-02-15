@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Chat Analyzer</h2>
+ <div>
+  
+ 
+ 
+    <button ion-button (click)="chooseFile()" >ChooseFile</button>
+    <button ion-button (click)="fetchData()" >FetchData</button>
+    <button ion-button (click)="TotalMessageCount()" >TotalMessageInGroup</button>
+    <button ion-button (click)="TotalGroupMember()" >TotalUser In Group</button>
+    <button ion-button (click)="TotalDaysGroupCreation()" >TotalDaysGroupCreation</button>
+    <button ion-button (click)="TotalLetterInGroup()" >Total words written in a group till now since group creation</button>
+      <button ion-button (click)="MessageWiseLetterCount()" >tatalletter in message user wise</button>
+      <button ion-button (click)="MessagePostByIndividual()" >Total MessagePostByIndividual</button>
+      <button ion-button (click)="EarlyRiser()" > early riser</button>
+      <button ion-button (click)="individualSendMsgInDay()" > member who send most messages of the day.</button>
+      <button ion-button type="submit" (click)="getdata() " >save</button>
+
+ </div>
+
+ 
+</ion-content>
+

@@ -1,0 +1,435 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Chat Analyzer</ion-title>
+    <!-- <button (click)="openModal()">History</button>
+    <button (click)="getdatafromjsontable()">save</button>
+    <button (click)="createPdf()">CreatePdf</button>
+    <button (click)="downloadPdf()">DownloadPdf</button>
+    <button (click)="SharePdf()">SharePdf</button> -->
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="has-header has-footer">
+
+  <!-- <h2><span> -->
+    <ion-icon name="information-circle-outline"></ion-icon>
+
+
+
+
+    <!-- This work order type requires additional information</span></h2> -->
+  <div class="accordion_wrap">
+
+
+      <div>
+          <button class="accordion" >History</button>
+          <div class="panel radio_text">
+              <ion-grid>
+              <ion-row>
+                <ion-col><div>Groupid</div></ion-col>
+                <ion-col ><div>GroupName</div></ion-col>
+              </ion-row>
+
+                  <ion-row *ngFor='let g of ginfo' (click)="getHistory(g)">
+                      <ion-col><div>{{g.key}}</div></ion-col>
+                      <ion-col ><div > {{g.data[0].title}}</div></ion-col>
+                  </ion-row>
+                </ion-grid>
+
+          </div>
+        </div>
+    <!-- /* Group Data*/ -->
+    <div>
+      <button class="accordion">Available Group Data</button>
+      <div class="panel radio_text">
+          <ion-grid>
+              <ion-row>
+                <ion-col><div>S.No.</div></ion-col>
+                <ion-col><div> Date</div></ion-col>
+                <ion-col><div>User</div></ion-col>
+                <ion-col><div>Message</div></ion-col>
+              </ion-row>
+               <ion-row *ngFor="let item of info.group;let i=index;">
+                  <ion-col><div>{{i+1}}</div></ion-col>
+                  <ion-col><div>{{item.date}}</div></ion-col>
+                  <ion-col><div>{{item.user}}</div></ion-col>
+                  <ion-col><div>{{item.message}}</div></ion-col>
+                </ion-row>
+            </ion-grid>
+
+      </div>
+    </div>
+    <!-- /* Group Data End*/ -->
+
+    <!-- /* Total Message By User*/ -->
+    <div>
+        <button class="accordion">Total Message Count  By User</button>
+        <div class="panel radio_text">
+            <ion-grid>
+                <ion-row>
+              <ion-col><div>S.No.</div></ion-col>
+              <ion-col><div>User</div></ion-col>
+              <ion-col><div> Message Count</div></ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of info.usermsgcount;let i=index;">
+                    <ion-col>
+                      <div>
+                        {{i+1}}
+                      </div>
+                    </ion-col>
+
+                    <ion-col>
+                      <div>
+                        {{item.user}}
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                          {{item.totalmsg}}
+                        </div>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+
+        </div>
+      </div>
+      <!-- /* Group Data End*/ -->
+
+    <!-- /* Group Data*/ -->
+    <div>
+        <button class="accordion">Members in a group</button>
+        <div class="panel radio_text">
+            <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div>
+                      S.No.
+                    </div>
+                  </ion-col>
+
+                  <ion-col>
+                    <div>
+                      User
+                    </div>
+                  </ion-col>
+
+                </ion-row>
+                <ion-row *ngFor="let item of info.userlist;let i=index;">
+                    <ion-col>
+                      <div>
+                        {{i+1}}
+                      </div>
+                    </ion-col>
+
+                    <ion-col>
+                      <div>
+                        {{item}}
+                      </div>
+                    </ion-col>
+
+                  </ion-row>
+              </ion-grid>
+
+        </div>
+      </div>
+      <!-- /* Group Data End*/ -->
+
+      <!-- / * Most Messager In Group  Begin*/ -->
+      <div>
+          <button class="accordion"> Who Send Most Message In Group</button>
+          <div class="panel">
+            <p>
+              <ion-item>
+                <ion-label color="primary" floating>User :- {{info.mostmessager.user}} ({{info.mostmessager.totalmsg}})</ion-label>
+                <ion-input readonly="true"></ion-input>
+              </ion-item>
+
+            </p>
+          </div>
+        </div>
+      <!-- /* Most Messager In Group End*/ -->
+
+<!-- / * Most Active User In Group  Begin*/ -->
+<div>
+    <button class="accordion">Most Active User In Group</button>
+    <div class="panel">
+      <p>
+        <ion-item>
+          <ion-label color="primary" floating>User :- {{info.mostmessager.user}} </ion-label>
+          <ion-input readonly="true"></ion-input>
+        </ion-item>
+
+      </p>
+    </div>
+  </div>
+<!-- /* Most Messager In Group End*/ -->
+
+    <!-- / * Least Messager In Group  Begin*/ -->
+    <div>
+        <button class="accordion">Least Messager In Group</button>
+        <div class="panel">
+          <p>
+            <ion-item>
+              <ion-label color="black" floating>User :- {{info.leastmesseager.user}} ({{info.leastmesseager.totalmsg}})</ion-label>
+              <ion-input readonly="true"></ion-input>
+            </ion-item>
+
+          </p>
+        </div>
+      </div>
+    <!-- /* Least Messager In Group End*/ -->
+    <!-- / * Total User*/ -->
+    <div>
+        <button class="accordion">Total User In Group</button>
+        <div class="panel">
+          <p>
+            <ion-item>
+              <ion-label color="primary" floating>{{info.totaluser}}</ion-label>
+              <ion-input readonly="true"></ion-input>
+            </ion-item>
+
+          </p>
+        </div>
+      </div>
+
+      <div>
+          <button class="accordion">Number of Day From Group Creation .</button>
+          <div class="panel">
+            <p>
+
+              <ion-item>
+                  <ion-label color="primary" floating>{{info.groupcreatedday}}</ion-label>
+                  <ion-input readonly="true"></ion-input>
+                </ion-item>
+            </p>
+          </div>
+        </div>
+    <!-- /* Total User*/ -->
+    <div>
+      <button class="accordion">Total Messages  in a Group</button>
+      <div class="panel">
+        <p>
+
+          <ion-item>
+              <ion-label color="primary" floating>{{info.totalmsg}}</ion-label>
+              <ion-input readonly="true"></ion-input>
+            </ion-item>
+        </p>
+      </div>
+    </div>
+     <!-- / * member who send most messages of the day.  Begin*/ -->
+     <div>
+      <button class="accordion">  Total Letters In Group Message </button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Letters :- {{info.totalletter}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+ <!-- / * Least active days of the group.  Begin*/ -->
+    <div>
+      <button class="accordion"> Total words written in a group till now since creation</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Total Words :- {{info.totalwords}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+
+ <!-- / * Most active days of the group.  Begin*/ -->
+    <div>
+      <button class="accordion"> Total count of media messages in a group</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Total Media :- {{info.mediacount}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+     <!-- / * Count Of Media Sent By individual member.  Begin*/ -->
+    <div>
+      <button class="accordion"> Total count of media posted by each member </button>
+      <div class="panel">
+        <ion-grid>
+          <ion-row>
+        <ion-col><div>S.No.</div></ion-col>
+        <ion-col><div>User</div></ion-col>
+        <ion-col><div> Message Count</div></ion-col>
+        <ion-col><div> Media Count</div></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let item of info.usermedia;let i=index;">
+              <ion-col>
+                <div>
+                  {{i+1}}
+                </div>
+              </ion-col>
+
+              <ion-col>
+                <div>
+                  {{item.user}}
+                </div>
+              </ion-col>
+              <ion-col>
+                  <div>
+                    {{item.totalmsg}}
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    {{item.msgstring}}
+                  </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+    <div>
+      <button class="accordion">  Which member has posted most media in the group</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Most Media By User :- {{info.mostmediabyuser}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+
+
+    <div>
+      <button class="accordion"> Day since group creation when most count of messages is posted (Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.mostmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+    <div>
+      <button class="accordion">Date when most messages are posted by individual member(Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.mostmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <button class="accordion">Date when least messages were sent in the group.(Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.leastmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <button class="accordion"> Day since group creation when most count of messages is posted (Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.mostmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+    <div>
+      <button class="accordion">Date when most messages are posted by individual member(Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.mostmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <button class="accordion">Date when least messages were sent in the group.(Date)</button>
+      <div class="panel">
+        <p>
+          <ion-item>
+            <ion-label color="black" floating>Date:- {{info.leastmsgdate.date}}</ion-label>
+            <ion-input readonly="true"></ion-input>
+          </ion-item>
+
+        </p>
+      </div>
+    </div>
+    <div>
+        <button class="accordion">Most Common Wold Use</button>
+        <div class="panel radio_text">
+            <ion-grid>
+                <ion-row>
+              <ion-col><div>S.No.</div></ion-col>
+              <ion-col><div>Word</div></ion-col>
+              <ion-col><div> Count</div></ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of info.mostwordused;let i=index;">
+                    <ion-col>
+                      <div>
+                        {{i+1}}
+                      </div>
+                    </ion-col>
+
+                    <ion-col>
+                      <div>
+                        {{item.word}}
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                          {{item.occurences}}
+                        </div>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+
+        </div>
+      </div>
+
+
+
+
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <!-- <ion-button color="primary">Primary</ion-button> -->
+    <button (click)="openModal()">History</button>
+    <button (click)="getdatafromjsontable()">save</button>
+    <button (click)="createPdf()">CreatePdf</button>
+    <button (click)="downloadPdf()">DownloadPdf</button>
+    <button (click)="SharePdf()">SharePdf</button>
+  </ion-toolbar>
+</ion-footer>
