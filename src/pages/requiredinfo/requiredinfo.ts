@@ -51,28 +51,28 @@ export class RequiredinfoPage {
     leastmsgdate:'',
     datewisemsgcount:[],
     datewiseusermessage:[],
-    mostwordused:[]
-  }
+    mostwordused:[],
+    earlyriser: '',
+    lateriser: ''
+  } 
 
 
 
   pdfObj = null;
 
   constructor(public loadingController:LoadingController, public  modalCtrl: ModalController,public viewCtrl: ViewController,public socialSharing:SocialSharing, public plt: Platform, public file: File, public fileOpener: FileOpener,public databaseprovider:DatabaseProvider,public http: Http, public navCtrl: NavController, public navParams: NavParams) {
-     //this.getLocalData();
+   
 
   }
 
   ionViewDidLoad() {
-//     console.log('ionViewDidLoad RequiredinfoPage');
+
      this.appChatdata=this.navParams.get('data');
 this.info.title=this.navParams.get('ctitle');
 console.log(this.title  + ' : ** Required Info Title **')
-     if(this.appChatdata!=undefined){
-    //console.log(">>>>>>",this.appChatdata)
+     if(this.appChatdata!=undefined){  
     var reader = new FileReader();
-    reader.onload = ()=> {
-      //  console.log("blob Textttt",reader.result);
+    reader.onload = ()=> {   
         this.getLocalData(reader.result)
     }
     reader.readAsText(this.appChatdata);
@@ -87,44 +87,72 @@ console.log(this.title  + ' : ** Required Info Title **')
       this.loading = this.loadingController.create({ content: "Logging in ,please wait..." });
       this.loading.present();
       let datas: any = [];
-
       let getrowfromstring: any = data.split('\n');
-
       getrowfromstring.forEach(element => {
         let getdatefromrow = element.split('-');
         let dateflow=getdatefromrow[0].split(',');
         if (getdatefromrow[1] !== undefined) {
           let splituser_msg = getdatefromrow[1].split(':');
-          let db = { date: getdatefromrow[0], user: splituser_msg[0], message: splituser_msg[1] };
-
-         // this.loading.dismiss();
+          let db = { date: getdatefromrow[0], user: splituser_msg[0], message: splituser_msg[1] };       
           let dbdate= { date: dateflow[0],time:dateflow[1], user: splituser_msg[0], message: splituser_msg[1] };
           this.datewisedata.push(dbdate);
           datas.push(db);
         }
 
-      });
-
-      //filter and save all data here
-       let db = datas.filter(x => x.message !== undefined);
-
-      //fetch data  from sqllite
+      });   
+       let db = datas.filter(x => x.message !== undefined);    
       this.datewisedata= this.datewisedata.filter(x => x.message !== undefined)
-   //   console.table(this.datewisedata);
-      // console.table(db);
+      this.datewisedata.forEach(el => {
+        let dnew: any = el.date + ',' + el.time;
+        var hh = new Date(dnew);
+
+        el.hour = hh.getHours();
+      });
+      let earlyriser: any = this.datewisedata.filter(x => x.hour >= "5" && x.hour <= "8");
+      let msgflowearly: any = new List<any>(earlyriser).GroupBy(y => y.user, x => x.message);
+      this.getearlyriser(msgflowearly, 'e');
+      let latesleer: any = this.datewisedata.filter(x => x.hour >= "0" && x.hour <= "4");
+      let msgflowlate: any = new List<any>(latesleer).GroupBy(y => y.user, x => x.message);
+
+      this.getearlyriser(msgflowlate, 'l');
+
+ 
       this.info.group = db;
       let leastdate= new List<any>(db).OrderBy(x=>x.date).First();
-      // console.table(leastdate);
+    
       var date1 = new Date(leastdate.date);
 var date2 = new Date();
 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
 var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))+1;
 this.info.groupcreatedday=diffDays.toString();
 this.getmessagecount(db);
-
 this.loading.dismiss();
-    // });
+ 
   }
+  getearlyriser = (db: any, type: string) => {
+
+    let Groupcircle: any = [];
+    for (var key in db) {
+      if (db.hasOwnProperty(key)) {       
+        let info = { date: key, totalmsg: db[key].length }     
+      if (db.hasOwnProperty(key)) {
+        let info = { user: key, totalmsg: db[key].length }
+        Groupcircle.push(info);
+      }
+    }
+
+    if (type === 'e') {
+      let earlyrisername: any = new List<any>(Groupcircle).OrderByDescending(x => x.totalmsg).First();
+      this.info.earlyriser = earlyrisername.user;
+      console.table(earlyrisername.user)
+    } else if (type === 'l') {
+      let latesleer: any = new List<any>(Groupcircle).OrderByDescending(x => x.totalmsg).First();
+      this.info.lateriser = latesleer.user;
+      console.table(latesleer.user);
+    }
+
+  }
+}
   getmessagecount = (db: any) => {
 
     let groups = new List<group>(db);
