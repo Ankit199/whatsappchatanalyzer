@@ -31,7 +31,7 @@ export class RequiredinfoPage {
  db2:any=[];
  appChatdata:any;
   info = {
-    title: 'Chat Info',
+    title: '',
     usemsg: '',
     group: [],
     groupcreatedday:'',
@@ -275,7 +275,7 @@ generateuserdatabydate(db:any){
     return s.split(' ').filter(function(str){return str!="";}).length;
 
 }
-  /** find most  common world used Begin */
+ 
   nthMostCommon(string, ammount) {
     var wordsArray = string.split(/\s/);
     var wordOccurrences = {}
@@ -301,8 +301,7 @@ generateuserdatabydate(db:any){
     return result;
 
   }
-  /** find most common world used END */
-  //Accordine Open
+ 
   ngOnInit() {
     var acc = document.getElementsByClassName("accordion");
     var i;
@@ -319,7 +318,7 @@ generateuserdatabydate(db:any){
       });
     }
   }
-  //Accordine End
+  
 
 
   openModal() {
@@ -377,30 +376,30 @@ getHistory(Db){
 console.log("db",Db);
 
 
-this.info = {
-  title: Db.data[0].title ,
-  usemsg: '',
-    group:[],
-    groupcreatedday:Db.data[0].groupcreatedday,
-    userlist: Db.data[0].userlist,
-    mostmessager:Db.data[0].mostmessager,
-    leastmesseager:Db.data[0].leastmesseager,
-    usermsgcount:Db.data[0].usermsgcount,
-    totalmsg: Db.data[0].totalmsg,
-    totaluser: Db.data[0].totaluser,
-    mostmessagerOfday:Db.data[0].mostmessagerOfday,
-    totalletter:Db.data[0].totalletter,
-    totalwords:Db.data[0].totalwords,
-    mediacount:Db.data[0].mediacount,
-    usermedia:Db.data[0].usermedia,
-    mostmediabyuser:Db.data[0].mostmediabyuser,
+  // this.info = {
+    this.info.title= Db.data[0].title,
+    this.info.usemsg= '',
+    this.info.group= [],
+    this.info.groupcreatedday= Db.data[0].groupcreatedday,
+    this.info.userlist= Db.data[0].userlist,
+    this.info.mostmessager= Db.data[0].mostmessager,
+    this.info.leastmesseager= Db.data[0].leastmesseager,
+    this.info.usermsgcount=Db.data[0].usermsgcount,
+    this.info.totalmsg= Db.data[0].totalmsg,
+    this.info.totaluser= Db.data[0].totaluser,
+    this.info.mostmessagerOfday= Db.data[0].mostmessagerOfday,
+    this.info.totalletter= Db.data[0].totalletter,
+    this.info.totalwords= Db.data[0].totalwords,
+    this.info.mediacount= Db.data[0].mediacount,
+    this.info.usermedia= Db.data[0].usermedia,
+    this.info.mostmediabyuser= Db.data[0].mostmediabyuser,
 
-    mostmsgdate:Db.data[0].mostmsgdate,
-    leastmsgdate:Db.data[0].leastmsgdate,
-    datewisemsgcount:Db.data[0].datewisemsgcount,
-    datewiseusermessage:Db.data[0].datewiseusermessage,
-    mostwordused:Db.data[0].mostwordused
-}
+    this.info.mostmsgdate= Db.data[0].mostmsgdate,
+    this.info.leastmsgdate= Db.data[0].leastmsgdate,
+    this.info.datewisemsgcount= Db.data[0].datewisemsgcount,
+    this.info.datewiseusermessage= Db.data[0].datewiseusermessage,
+    this.info.mostwordused= Db.data[0].mostwordused
+  //}
 console.log("info",this.info)
 }
 
